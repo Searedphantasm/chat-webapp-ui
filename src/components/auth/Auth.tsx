@@ -11,7 +11,7 @@ const Auth = () => {
         <Stack spacing={2} sx={{
             height: "100vh", maxWidth: {
                 xs: "70%",
-                md: "30%"
+                md: "50%"
             }, margin: "0 auto"
         }}>
             <TextField variant={"outlined"} type={"email"} label={"Email"} value={email}
