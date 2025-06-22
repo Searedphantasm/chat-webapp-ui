@@ -5,11 +5,11 @@ import {useState} from "react";
 
 interface AuthProps {
     submitLabel: string;
-    onSubmit: (credentials: {email: string, password: string}) => Promise<void>;
+    onSubmit: (credentials: { email: string, password: string }) => Promise<void>;
     children: React.ReactNode;
 }
 
-const Auth = ({submitLabel,onSubmit,children}:AuthProps) => {
+const Auth = ({submitLabel, onSubmit, children}: AuthProps) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -17,10 +17,13 @@ const Auth = ({submitLabel,onSubmit,children}:AuthProps) => {
 
     return (
         <Stack spacing={2} sx={{
-            height: "100vh", maxWidth: {
+            height: "100vh",
+            maxWidth: {
                 xs: "70%",
                 md: "50%"
-            }, margin: "0 auto"
+            },
+            margin: "0 auto",
+            justifyContent: "center",
         }}>
             <TextField variant={"outlined"} type={"email"} label={"Email"} value={email}
                        onChange={(e) => setEmail(e.target.value)}/>
