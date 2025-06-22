@@ -1,17 +1,17 @@
-import {Container} from "@mui/material";
-import Auth from "./components/auth/Auth.tsx";
+import {Container, CssBaseline, ThemeProvider} from "@mui/material";
+import {RouterProvider} from "react-router";
+import router from "./routes.tsx";
+import theme from "./theme.ts";
 
+const App = () => {
+    return (
+        <ThemeProvider defaultMode={"dark"} theme={theme} >
+            <CssBaseline />
+            <Container>
+                <RouterProvider router={router} />
+            </Container>
+        </ThemeProvider>
+    );
+};
 
-function App() {
-
-  return (
-    <Container>
-        <h1>
-            Dark Mode
-        </h1>
-        <Auth />
-    </Container>
-  )
-}
-
-export default App
+export default App;
