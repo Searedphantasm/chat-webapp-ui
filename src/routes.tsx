@@ -1,7 +1,9 @@
 import {createBrowserRouter} from "react-router";
-import LoginPage from "./pages/Login.tsx";
-import SignupPage from "./pages/Signup.tsx";
-import Home from "./pages/Home.tsx";
+import {lazy} from "react";
+const LoginPage = lazy(() => import("./pages/Login"));
+const SignupPage = lazy(() => import("./pages/Signup"));
+const Home = lazy(() => import("./pages/Home"));
+
 
 
 const router = createBrowserRouter([
@@ -12,7 +14,7 @@ const router = createBrowserRouter([
         path: "/signup",
         element: <SignupPage />
     },{
-        index: true,
+        path: "/",
         element: <Home />
     }
 ]);

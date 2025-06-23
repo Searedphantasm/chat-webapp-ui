@@ -3,10 +3,12 @@ import {Link} from "react-router";
 import {useCreateUser} from "../hooks/useCreateUser.ts";
 import {useState} from "react";
 import {extractErrorMessage} from "../utils/errors.ts";
+import {useLogin} from "../hooks/useLogin.ts";
 
 const SignupPage = () => {
     const [createUser] = useCreateUser();
     const [error,setError] = useState("");
+    const {login} = useLogin();
 
     return (
         <div>
@@ -17,6 +19,7 @@ const SignupPage = () => {
                             createUserInput: {email, password},
                         }
                     })
+                    await login({email, password});
                     setError("");
                 } catch (e) {
                     const errorMessage = extractErrorMessage(e);
