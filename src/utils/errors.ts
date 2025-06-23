@@ -1,6 +1,10 @@
 const extractErrorMessage = (err: any) => {
     const errorMsg = err.graphQLErrors[0]?.extensions?.originalError.message;
 
+    if (!errorMsg) {
+        return;
+    }
+
     if (Array.isArray(errorMsg)) {
         return formatErrorMsg(errorMsg[0]);
     } else {

@@ -1,6 +1,5 @@
 import Auth from "../components/auth/Auth.tsx";
 import {Link} from "react-router";
-import {Link as MUILink} from "@mui/material"
 import {useCreateUser} from "../hooks/useCreateUser.ts";
 import {useState} from "react";
 import {extractErrorMessage} from "../utils/errors.ts";
@@ -23,13 +22,13 @@ const SignupPage = () => {
                     const errorMessage = extractErrorMessage(e);
                     if (errorMessage) {
                         setError(errorMessage);
+                        return;
                     }
+                    setError("Unknown error occurred");
                 }
             }} error={error}>
-                <Link to={"/login"} style={{ alignSelf: "center" }}>
-                    <MUILink>
-                        Login
-                    </MUILink>
+                <Link to={"/login"} style={{ alignSelf: "center", color: "skyblue" }}>
+                    Login
                 </Link>
             </Auth >
         </div>

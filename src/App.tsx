@@ -4,6 +4,7 @@ import router from "./routes.tsx";
 import theme from "./theme.ts";
 import {ApolloProvider} from "@apollo/client";
 import client from "./constants/apollo-client.ts";
+import Guard from "./components/auth/Guard.tsx";
 
 const App = () => {
     return (
@@ -11,7 +12,9 @@ const App = () => {
             <ThemeProvider defaultMode={"dark"} theme={theme} >
                 <CssBaseline />
                 <Container>
-                    <RouterProvider router={router} />
+                    <Guard>
+                        <RouterProvider router={router} />
+                    </Guard>
                 </Container>
             </ThemeProvider>
         </ApolloProvider>
