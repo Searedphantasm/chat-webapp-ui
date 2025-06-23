@@ -7,9 +7,10 @@ interface AuthProps {
     submitLabel: string;
     onSubmit: (credentials: { email: string, password: string }) => Promise<void>;
     children: React.ReactNode;
+    error?: string;
 }
 
-const Auth = ({submitLabel, onSubmit, children}: AuthProps) => {
+const Auth = ({submitLabel, onSubmit, children, error}: AuthProps) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -26,9 +27,15 @@ const Auth = ({submitLabel, onSubmit, children}: AuthProps) => {
             justifyContent: "center",
         }}>
             <TextField variant={"outlined"} type={"email"} label={"Email"} value={email}
-                       onChange={(e) => setEmail(e.target.value)}/>
+                       onChange={(e) => setEmail(e.target.value)}
+                       error={!!error}
+                       helperText={error}
+            />
             <TextField variant={'outlined'} type={"password"} label={"Password"} value={password}
-                       onChange={(e) => setPassword(e.target.value)}/>
+                       onChange={(e) => setPassword(e.target.value)}
+                       error={!!error}
+                       helperText={error}
+            />
             <Button variant={"contained"} onClick={() => onSubmit({email, password})}>
                 {submitLabel}
             </Button>
