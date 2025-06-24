@@ -6,21 +6,43 @@ import MobileNavigation from "./mobile/MobileNavigation.tsx";
 import MobileBranding from "./mobile/MobileBranding.tsx";
 import Navigation from './Navigation.tsx';
 import Settings from './Settings.tsx';
+import {useReactiveVar} from "@apollo/client";
+import {authenticatedVar} from "../../constants/authenticated.ts";
+import type {PageInterface} from "../../interfaces/page.interface.ts";
 
-const pages: string[] = [];
+const pages: PageInterface[] = [
+    {
+        title: "Home",
+        path: "/",
+    },
+];
+
+const unAuthenticatedPages: PageInterface[] = [
+    {
+        title: "login",
+        path: "/login",
+    },
+    {
+        title: "signup",
+        path: "/signup",
+    }
+]
 
 const Header = () => {
 
+    const authenticated = useReactiveVar(authenticatedVar)
 
     return (
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Branding/>
-                    <MobileNavigation pages={pages}/>
+                    <MobileNavigation pages={authenticated ? pages : unAuthenticatedPages}/>
                     <MobileBranding/>
-                    <Navigation pages={pages}/>
-                    <Settings  />
+                    <Navigation pages={authenticated ? pages : unAuthenticatedPages}/>
+                    {authenticated && (
+                        <Settings  />
+                    )}
                 </Toolbar>
             </Container>
         </AppBar>

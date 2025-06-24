@@ -6,12 +6,14 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import {useLogout} from "../../hooks/useLogout.ts";
+import {onLogout} from "../../utils/logout.ts";
 
-const settings = ['Logout'];
 
 const Settings = () => {
 
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+    const { logout } = useLogout()
 
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -46,11 +48,13 @@ const Settings = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
             >
-                {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                        <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+                    <MenuItem key={'logout'} onClick={async () => {
+                        await logout();
+                        onLogout();
+                        handleCloseUserMenu();
+                    }}>
+                        <Typography sx={{ textAlign: 'center' }}>Logout</Typography>
                     </MenuItem>
-                ))}
             </Menu>
         </Box>
     );

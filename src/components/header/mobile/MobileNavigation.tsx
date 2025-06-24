@@ -5,10 +5,12 @@ import Box from "@mui/material/Box";
 import {useState} from "react";
 import * as React from "react";
 import MenuIcon from '@mui/icons-material/Menu';
+import type {PageInterface} from "../../../interfaces/page.interface.ts";
+import router from "../../../routes.tsx";
 
 
 interface MobileNavigationProps {
-    pages: string[];
+    pages: PageInterface[];
 }
 
 const MobileNavigation = ({pages}: MobileNavigationProps) => {
@@ -53,8 +55,11 @@ const MobileNavigation = ({pages}: MobileNavigationProps) => {
                 sx={{ display: { xs: 'block', md: 'none' } }}
             >
                 {pages.map((page) => (
-                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                        <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
+                    <MenuItem key={page.title} onClick={() => {
+                        handleCloseNavMenu();
+                        router.navigate(page.path);
+                    }}>
+                        <Typography sx={{ textAlign: 'center' }}>{page.title}</Typography>
                     </MenuItem>
                 ))}
             </Menu>

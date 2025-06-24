@@ -1,6 +1,7 @@
 import {useGetMe} from "../../hooks/useGetMe.ts";
-import React from 'react'
+import React, {useEffect} from 'react'
 import excludedRoutes from "../../constants/excluded-routes.ts";
+import {authenticatedVar} from "../../constants/authenticated.ts";
 
 interface GuardProps {
     children: React.ReactNode;
@@ -9,6 +10,11 @@ interface GuardProps {
 const Guard = ({children}:GuardProps) => {
     const {data: user} = useGetMe();
 
+    useEffect(() => {
+        if (user) {
+            authenticatedVar(true)
+        }
+    }, [user]);
 
     return (
         <>
