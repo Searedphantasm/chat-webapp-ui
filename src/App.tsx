@@ -6,6 +6,7 @@ import {ApolloProvider} from "@apollo/client";
 import client from "./constants/apollo-client.ts";
 import Guard from "./components/auth/Guard.tsx";
 import Header from "./components/header/Header.tsx";
+import AutohideSnackbar from "./components/snackbar/Snackbar.tsx";
 
 const App = () => {
     return (
@@ -18,6 +19,7 @@ const App = () => {
                         <RouterProvider router={router} />
                     </Guard>
                 </Container>
+                <AutohideSnackbar />
             </ThemeProvider>
         </ApolloProvider>
     );

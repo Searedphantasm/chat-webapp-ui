@@ -8,6 +8,8 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import {useLogout} from "../../hooks/useLogout.ts";
 import {onLogout} from "../../utils/logout.ts";
+import {snackVar} from "../../constants/snack.ts";
+import {UNKOWN_ERROR_SNACK_MESSAGE} from "../../constants/errors.ts";
 
 
 const Settings = () => {
@@ -49,9 +51,13 @@ const Settings = () => {
                 onClose={handleCloseUserMenu}
             >
                     <MenuItem key={'logout'} onClick={async () => {
-                        await logout();
-                        onLogout();
-                        handleCloseUserMenu();
+                        try {
+                            await logout();
+                            onLogout();
+                            handleCloseUserMenu();
+                        } catch (e) {
+                            snackVar(UNKOWN_ERROR_SNACK_MESSAGE)
+                        }
                     }}>
                         <Typography sx={{ textAlign: 'center' }}>Logout</Typography>
                     </MenuItem>

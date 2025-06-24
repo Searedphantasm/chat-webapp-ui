@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {API_URL} from "../constants/urls.ts";
 import client from "../constants/apollo-client.ts";
+import {CREDENTIALS_ERROR_MESSAGE, NETWORK_ERROR_MESSAGE, UNKOWN_ERROR_MESSAGE} from "../constants/errors.ts";
 
 
 interface LoginRequest {
@@ -23,15 +24,15 @@ const useLogin = () => {
             });
         } catch (_networkErr) {
             // only network
-            setError("Could not connect to the server. Please try again later");
+            setError(NETWORK_ERROR_MESSAGE);
             return;
         }
 
         if (!res.ok) {
             if (res.status === 401) {
-                setError("Credentials are invalid");
+                setError(CREDENTIALS_ERROR_MESSAGE);
             } else {
-                setError("Unknown error occurred");
+                setError(UNKOWN_ERROR_MESSAGE);
             }
             return;
         }
