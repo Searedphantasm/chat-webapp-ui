@@ -4,6 +4,7 @@ import excludedRoutes from "../../constants/excluded-routes.ts";
 import {authenticatedVar} from "../../constants/authenticated.ts";
 import {snackVar} from "../../constants/snack.ts";
 import {UNKOWN_ERROR_SNACK_MESSAGE} from "../../constants/errors.ts";
+import usePath from "../../hooks/usePath.ts";
 
 interface GuardProps {
     children: React.ReactNode;
@@ -11,6 +12,7 @@ interface GuardProps {
 
 const Guard = ({children}:GuardProps) => {
     const {data: user, error} = useGetMe();
+    const path = usePath();
 
     useEffect(() => {
         if (user) {
@@ -27,7 +29,7 @@ const Guard = ({children}:GuardProps) => {
     return (
         <>
             {
-                excludedRoutes.includes(window.location.pathname) ? children : user && children
+                excludedRoutes.includes(path) ? children : user && children
             }
         </>
     )
