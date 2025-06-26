@@ -3,11 +3,15 @@ import Toolbar from "@mui/material/Toolbar";
 import {IconButton} from "@mui/material";
 import  AddCircleOutline  from "@mui/icons-material/AddCircleOutline";
 
-const ChatListHeader = () => {
+interface ChatListHeaderProps {
+    handleAddChat: () => void;
+}
+
+const ChatListHeader = ({handleAddChat}: ChatListHeaderProps) => {
     return (
         <AppBar position="static" color={"transparent"}>
             <Toolbar>
-                <IconButton size={"large"} edge={"start"}>
+                <IconButton onClick={handleAddChat} size={"large"} edge={"start"}>
                     <AddCircleOutline  />
                 </IconButton>
             </Toolbar>

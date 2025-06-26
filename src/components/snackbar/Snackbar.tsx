@@ -8,7 +8,7 @@ const  AutohideSnackbar = () =>  {
 
 
     const handleClose = (
-        event?: SyntheticEvent | Event,
+        _event?: SyntheticEvent | Event,
         reason?: string,
     ) => {
         if (reason === 'clickaway') {
