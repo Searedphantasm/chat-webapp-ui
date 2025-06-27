@@ -14,13 +14,15 @@ const App = () => {
 
     const path = usePath();
 
+    const showChatListVar = path === "/" || path.includes('chats')
+
     return (
         <ApolloProvider client={client}>
             <ThemeProvider defaultMode={"dark"} theme={theme} >
                 <CssBaseline />
                 <Header />
                 <Guard>
-                    {path === "/" ? (
+                    {showChatListVar ? (
                         <Grid container>
                             <Grid size={{ md: 3 }}>
                                 <ChatList />
@@ -42,7 +44,7 @@ const App = () => {
 
 const Routes = () => {
     return (
-        <Container>
+        <Container sx={{ height: "100%"}}>
             <RouterProvider router={router} />
         </Container>
     )
