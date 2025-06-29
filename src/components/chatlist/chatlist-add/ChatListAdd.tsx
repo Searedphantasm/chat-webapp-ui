@@ -15,6 +15,7 @@ import Typography from "@mui/material/Typography";
 import {useState} from "react";
 import {useCreateChat} from "../../../hooks/useCreateChat.ts";
 import {UNKOWN_ERROR_MESSAGE} from "../../../constants/errors.ts";
+import router from "../../../routes.tsx";
 
 
 interface ChatListAddProps {
@@ -96,7 +97,7 @@ const ChatListAdd = ({open, handleClose}: ChatListAddProps) => {
                         }
 
                         try {
-                            await createChat({
+                            const chat = await createChat({
                                 variables: {
                                     createChatInput: {
                                         isPrivate,
@@ -105,6 +106,8 @@ const ChatListAdd = ({open, handleClose}: ChatListAddProps) => {
                                 }
                             });
                             onClose();
+
+                            router.navigate(`/chats/${chat.data?.createChat._id}`)
                         } catch (_err) {
                             setError(UNKOWN_ERROR_MESSAGE);
                         }
